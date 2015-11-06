@@ -1,0 +1,15 @@
+# Dropbox OAuth2 access token
+#
+token='AABBCCDDEEFFGGHHIIJJKKLLMMNNOOPP'
+
+# Where processed images are placed
+#
+sent_folder='sent'
+
+# Email associated with appengine account
+#
+sender_email='user@example.com'
+
+# Replace user with the onereceipt username
+#
+destination_email='user@onereceipt.com'
