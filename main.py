@@ -91,15 +91,17 @@ class ScanHandler(webapp2.RequestHandler):
             if result.status_code == 200:
               metadata = json.loads(result.content)
               if metadata['contents']:
+                  delay = 0
                   for content in metadata['contents']:
                       if content:
                           if not content['is_dir']:
                               resp_json['files'].append(content['path'])
                               # Add the task to the default queue.
-                              taskqueue.add(url='/worker', params={'path': content['path'][1:]})
+                              taskqueue.add(url='/worker', params={'path': content['path'][1:]}, countdown=delay)
+                              delay = delay + 10
             self.response.status = 200
         except Exception as e:
-            logging.error('Error while scanning for new files')
+            logging.exception('Error while scanning for new files')
             self.response.status = 500
             resp_json['status'] = 'failure'
         
