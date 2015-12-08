@@ -98,7 +98,7 @@ class ScanHandler(webapp2.RequestHandler):
                               resp_json['files'].append(content['path'])
                               # Add the task to the default queue.
                               taskqueue.add(url='/worker', params={'path': content['path'][1:]}, countdown=delay)
-                              delay = delay + 10
+                              delay = delay + 61
             self.response.status = 200
         except Exception as e:
             logging.exception('Error while scanning for new files')
